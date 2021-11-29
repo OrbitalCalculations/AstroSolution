@@ -2,7 +2,7 @@
 
 This is the source-code for the WebApp hosted at [https://paloz.marum.de/AstroComputation/index.html].
 
-![image info](<img src="./Docs/AstroSolutionScreenshot.png" alt="Screenshot" width="200"/>)
+![image info](<img src="https://github.com/OrbitalCalculations/AstroSolution/blob/main/Docs/AstroSolutionScreenshot.png" alt="Screenshot" width="200"/>)
 
 The static (compiled) files in ./Bundle can be served locally, e.g. through
 ```python3 -m http.server --directory Bundle```
