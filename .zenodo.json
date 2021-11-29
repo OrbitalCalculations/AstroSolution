@@ -1,0 +1,28 @@
+{
+    "description": "<p>Source code for website at <a href=\"https://paloz.marum.de/AstroComputation/index.html\">https://paloz.marum.de/AstroComputation/index.html</a></p>\n\n<p>A TokamakUI and SwiftWasm based WebApp to calculate orbital solutions with a tidal dissipation and dynamical ellipticity Earth model based on Laskar et al. (1993), providing solutions for La1993; La2010a,b,c,d; ZB2017e; and ZB2018a.</p>\n\n<p>Based on original code by <a href=\"https://cdsarc.u-strasbg.fr/viz-bin/ftp-index?/ftp/cats/vi/63\">Laskar et al., 1993</a>.</p>", 
+    "license": "BSD-3-Clause", 
+    "title": "OrbitalCalculations/AstroSolution: Zenodo Release v0.0.2", 
+    "version": "0.0.2", 
+    "upload_type": "software", 
+    "publication_date": "2021-11-29", 
+    "creators": [
+        {
+            "orcid": "0000-0003-3386-0923", 
+            "affiliation": "University of Bremen, MARUM", 
+            "name": "Heiko Pälike"
+        }
+    ], 
+    "access_right": "open", 
+    "related_identifiers": [
+        {
+            "scheme": "url", 
+            "identifier": "https://github.com/OrbitalCalculations/AstroSolution/tree/0.0.2", 
+            "relation": "isSupplementTo"
+        }, 
+        {
+            "scheme": "doi", 
+            "identifier": "10.5281/zenodo.5736415", 
+            "relation": "isVersionOf"
+        }
+    ]
+}
