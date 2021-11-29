@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Pälike
+    given-names: Heiko
+    orcid: https://orcid.org/0000-0003-3386-0923
+title: OrbitalCalculations/AstroSolution: Zenodo Release v0.0.2
+version: 0.0.2
+doi: 10.5281/zenodo.5736416
+date-released: 2021-11-29
