@@ -4,6 +4,9 @@ This is the source-code for the WebApp hosted at [https://paloz.marum.de/AstroCo
 
 ![image info](./Docs/AstroSolutionScreenshot.png)
 
+The static (compiled) files in ./Bundle can be served locally, e.g. through
+```python3 -m http.server --directory Bundle```
+
 This package implements the integration of orbital (astronomical) solutions
 for Earth, based on the original implementation by [Laskar et al. (1993)](https://cdsarc.u-strasbg.fr/viz-bin/ftp-index?/ftp/cats/vi/63)
 (retrieved 29 Nov 2021). In particular, it makes use of Keplerian elements, 
