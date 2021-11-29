@@ -1,0 +1,10 @@
+.DS_Store
+/.build
+/Packages
+/*.xcodeproj
+xcuserdata/
+DerivedData/
+Bundle/
+Bundle.tjz
+runner/node_modules/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
