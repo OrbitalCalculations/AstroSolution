@@ -5,7 +5,7 @@ This is the source-code for the WebApp hosted at [https://paloz.marum.de/AstroCo
 ![image info](/Docs/AstroSolutionScreenshot_small.png)
 
 The static (compiled) files in ./Bundle can be served locally, e.g. through
-```python3 -m http.server --directory Bundle```
+```python3 -m http.server --directory Bundle```.
 
 This package implements the integration of orbital (astronomical) solutions
 for Earth, based on the original implementation by [Laskar et al. (1993)](https://cdsarc.u-strasbg.fr/viz-bin/ftp-index?/ftp/cats/vi/63)
@@ -15,6 +15,10 @@ integration methods. The calculation is performed by the client's machine by
 compiling the code as Wasm, using [SwiftWasm](https://swiftwasm.org), and 
 the [TokamakUI](https://github.com/TokamakUI/Tokamak) project to provide a 
 SwiftUI like declarative Webpage definition.
+
+Using the [carton](https://github.com/swiftwasm/carton) tool, the file can be 
+compiled, packed and served through ```carton dev --release``` or used to 
+re-generate the files in ./Bundle through ```carton bundle```.
 
 Orbital elements were published for the solutions of:
 - Laskar, J., Joutel, F., Boudin, F.: 1993, Orbital, precessional and insolation 
