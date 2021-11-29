@@ -1,5 +1,9 @@
 # AstroSolution
 
+This is the source-code for the WebApp hosted at [https://paloz.marum.de/AstroComputation/index.html].
+
+![image info](./Docs/AstroSolutionScreenshot.png)
+
 This package implements the integration of orbital (astronomical) solutions
 for Earth, based on the original implementation by [Laskar et al. (1993)](https://cdsarc.u-strasbg.fr/viz-bin/ftp-index?/ftp/cats/vi/63)
 (retrieved 29 Nov 2021). In particular, it makes use of Keplerian elements, 
@@ -46,3 +50,6 @@ Likewise, for the orbital solution La2011, referenced as
  no data were formally published, but can be accessed via (Astrochron)[http://www.geology.wisc.edu/~smeyers/astrochron/la11.txt.bz2]. 
  Both solutions can thus unfortunately not be
  used for additional reproducible research.
+
+Heiko Pälike, 29. November 2021
+
