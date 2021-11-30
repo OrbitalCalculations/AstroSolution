@@ -13,7 +13,7 @@ import OpenCombineJS
 
 import Foundation
 
-class AppEnvironment: ObservableObject {
+final class AppEnvironment: ObservableObject {
   @Published var solution: AstroSolutionEnum = .La1993
   @Published var startMyr: Double = 10.0
   @Published var fgam: Double = 1.0
@@ -63,7 +63,7 @@ class AppEnvironment: ObservableObject {
     }
         
     let fileName =
-    "\(solutionName)_(\(String(format: "%4.2f", fgam)),\(String(format:"%3.1f", cmar)))_0-\(startMyr)Ma.txt"
+    "\(solutionName)_(\(String(format: "%6.4f", fgam)),\(String(format:"%3.1f", cmar)))_0-\(startMyr)Ma.txt"
     return fileName
   }
 }
@@ -126,17 +126,6 @@ public struct UsePrecomputed: View {
     }
 }
 
-struct HTMLProgressView: View {
-  public var body: some View {
-    #if os(WASI)
-    HTML("label", ["for": "file"]){
-      Text("Downloading progress:")
-      HTML("progress", ["max": "100", "value": "32"])
-    }
-    #endif
-    
-  }
-}
 struct StatusView: View {
   @EnvironmentObject var environment: AppEnvironment
   public var body: some View {
@@ -208,12 +197,11 @@ struct ComputationButton: View {
 }
 
 struct FgamCmarSelectionView: View {
- 
   @EnvironmentObject var environment: AppEnvironment
 
-  let fgamMin = 0.90
-  let fgamMax = 1.10
-  let fgamStep = 0.01
+  let fgamMin = 0.9800
+  let fgamMax = 1.0200
+  let fgamStep = 0.0005
   let cmarMin = 0.0
   let cmarMax = 2.0
   let cmarStep = 0.1
@@ -235,19 +223,18 @@ struct FgamCmarSelectionView: View {
     )
 
     VStack(alignment: .leading) {
-      
       Slider(value: fgamProxy,
                  in: fgamMin...fgamMax,
                  step: fgamStep,
-                 minimumValueLabel: Text("\(String(format: "%4.2f", fgamMin))"),
-                 maximumValueLabel: Text("\(String(format: "%4.2f", fgamMax))")
+                 minimumValueLabel: Text("\(String(format: "%6.4f", fgamMin))"),
+                 maximumValueLabel: Text("\(String(format: "%6.4f", fgamMax))")
       ) {
         
-        Text("dynamical ellipticity: \(String(format: "%4.2f", environment.fgam))")
+        Text("dynamical ellipticity: \(String(format: "%6.4f", environment.fgam))")
       }
       HStack {
         Text("dynamical ellipticity:")
-        Text("\(String(format: "%4.2f", environment.fgam))")
+        Text("\(String(format: "%6.4f", environment.fgam))")
           .foregroundColor(.blue)
           .background(.white)
           .padding(5)
@@ -319,48 +306,6 @@ struct startMyrSelectionView: View {
   }
 }
 
-struct FetchView: View {
-  
-  @Binding var fetchedSolutions: [AstroSolutions]// = []
-  
-  func fetchData() {
-    //let urlString = "https://paloz.marum.de/fileStore/astroSolutions/precomputedList.json"
-    let urlString = "https://paloz.marum.de/fileStore/astroSolutions/astroSolutionList.json"
-    //let decoder = JSONDecoder()
-    //let testDataArr = try! decoder.decode([AstroSolutions].self, from: jsonAstroSolutions.data(using: .utf8)!)
-    let _ = Task.init {
-      print("Task init")
-      do {
-        let test = Task {
-          try await JSPromise(JSObject.global.fetch.function!(urlString).object!)!.value
-        }
-        let result = try await JSPromise(test.value.json().object!)!.value
-        //print("result: \(result)")
-        let result2: [AstroSolutions] = try JSValueDecoder().decode(from: result)
-        //print("fetchedSolutions: \(result2)")
-        self.fetchedSolutions = result2
-      }
-    }
-  }
-  
-  var body: some View {
-    VStack {
-      Text("FetchView").onAppear {
-        print("onAppear")
-        fetchData()
-      }
-
-      ForEach(fetchedSolutions){
-        Text($0.name)
-      }
-    }
-  }
-  
-  private func fetch(_ url: String) -> JSPromise {
-    JSPromise(JSObject.global.fetch.function!(url).object!)!
-  }
-}
-
 struct CustomDivider: View {
     let height: CGFloat = 1
     let color: Color = .white
@@ -375,121 +320,3 @@ struct CustomDivider: View {
         .opacity(opacity)
     }
 }
-
-struct ExperimentalView: View {
-  var body: some View {
-    EmptyView()
-    //HTMLView()
-
-    /*NavigationView {
-      HStack{
-         NavigationLink("Register", destination: Text("1"))
-         NavigationLink("Login", destination: Text("2"))
-      }
-    }*/
-  
-    //UsePrecomputed(isOn: $usePrecomputedSolution)
-    /*
-    if usePrecomputedSolution {
-        VStack {
-            ParameterLabels()
-            Parameters(selection: $precomputedSelection)
-            .foregroundColor(.primary)
-            .opacity(usePrecomputedSolution ? 1 : 0)
-        }
-    } else {
-        VStack {
-            ParameterLabels()
-            HStack {
-                TextField("A"/*Text(String(describing: "\(self.fgam)"))*/, text: $fgamText)
-                TextField("B"/*Text(String(describing: "\(self.cmar)"))*/, text: $cmarText)
-            }
-        }
-    }
-    
-    */
-    /*
-    HStack {
-          TextField("fgam", text: $fgamText, onCommit: {
-              if let val = Double(fgamText) {
-                  self.fgam = val
-              }}).padding()
-        TextField("cmar", text: $cmarText, onCommit: {
-            if let val0 = NumberFormatter().number(from: "3.0")?.doubleValue {
-                print(val0)
-            } else {
-                print("error")
-            }
-            if let val = Double(cmarText) {
-                self.cmar = val
-            }})
-      }
-      HStack {
-          Text(String(describing: String(format: "%.2f", fgam)))
-          Text(String(describing: String(format: "%.2f", cmar)))
-      }
-     */
-    /*if usePrecomputedSolution {
-        VStack {
-            ParameterLabels()
-            Parameters(selection: $precomputedSelection)
-            .foregroundColor(.primary)
-            .opacity(usePrecomputedSolution ? 1 : 0)
-        }
-    } else {
-        VStack {
-            ParameterLabels()
-            HStack {
-                TextField(Text(String(describing: self.fgam)))
-                TextField(Text(String(describing: self.cmar)))
-            }
-        }
-    }*/
-  }
-}
-
-// @main attribute is not supported in SwiftPM apps.
-// See https://bugs.swift.org/browse/SR-12683 for more details.
-
-struct HTMLView: View {
-    var body: some View {
-      Text("HTMLView")
-      #if os(WASI)
-        HTML("svg", ["width": "100", "height": "100"]) {
-              HTML("circle", [
-                "cx": "50", "cy": "50", "r": "40",
-                "stroke": "green", "stroke-width": "4", "fill": "yellow",
-              ])
-            }
-      #endif
-    }
-}
-
-struct TooltipView: View {
-  
-  @State private var isHovering = false
-  private var text: String = ""
-  
-  init(_ text: String) {
-    self.text = text
-  }
-
-  var body: some View {
-    HStack {
-    Text("ⓘ")
-      .onHover {hovering in
-        isHovering = hovering
-      }
-      //if isHovering {
-        Text(text)
-          .foregroundColor(.white)
-          .background(.black)
-          .frame(width: 300)
-          .opacity(isHovering ? 1 : 0)
-      //} else {
-      //  EmptyView()
-      //}
-    }
-  }
-}
-
