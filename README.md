@@ -5,7 +5,9 @@ This is the source-code for the WebApp hosted at [https://paloz.marum.de/AstroCo
 [![DOI](https://zenodo.org/badge/433157085.svg)](https://zenodo.org/badge/latestdoi/433157085)
 
 Please cite as "AstroSolution, 2021, Heiko Pälike, [https://dx.doi.org/10.5281/zenodo.5736416]"
+
 ![image info](/Docs/AstroSolutionScreenshot_small.png)
+
 
 The static (compiled) files in ./Bundle can be served locally, e.g. through
 ```python3 -m http.server --directory Bundle```.
