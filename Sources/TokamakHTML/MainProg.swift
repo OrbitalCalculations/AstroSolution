@@ -10,6 +10,7 @@ import JavaScriptKit
 import JavaScriptEventLoop
 import OpenCombineShim
 import OpenCombineJS
+import Plotly
 
 import Foundation
 import LNTBinaryCoding
@@ -25,7 +26,7 @@ import WASILibc
 let IPRT = 0
 
 struct AstroSolutionApp: App {
-    var body: some Scene {
+  var body: some TokamakShim.Scene {
       WindowGroup("AstroSolution WebApp") {
           ContentView()
       }
@@ -48,7 +49,22 @@ struct ContentView: View {
   @StateObject var environment = AppEnvironment()
 
   
+  func setupPlotly() {
+    #if os(WASI)
+    let document = JSObject.global.document
+    let script = document.createElement("script")
+    let _ = script.setAttribute("src", "https://cdn.plot.ly/plotly-latest.min.js")
+    let _ = document.head.appendChild(script)
+    //_ = document.head.insertAdjacentHTML("beforeend", #"""
+    //<link
+    //  rel="stylesheet"
+    //  href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    //"""#)
+    #endif
+  }
+  
   var body: some View {
+    let _ = setupPlotly()
       let solutionProxy = Binding(
           get: { solutionSelection },
           set: { newValue in
@@ -64,21 +80,42 @@ struct ContentView: View {
         Text("Computation Tool for Astronomical Solutions")
           .bold()
           .font(.headline)
-
         
-        HStack {
-          AstroSolutionView(selection: solutionProxy)
-          //TooltipView("Different astronomical solutions can be selected here. Please note that some are not (yet) available (La2004/La2011), as their orbital elements have not been published yet, and are therefore irreproducible.")
-        }
+        Group {
+        AstroSolutionView(selection: solutionProxy)
         CustomDivider()
-        startMyrSelectionView()
+        
+        StartMyrSelectionView()
         CustomDivider()
+        
         FgamCmarSelectionView()
         CustomDivider()
+        
         ComputationButton(solutionSelection: solutionProxy)
           .buttonStyle(BorderedProminentButtonStyle())
         CustomDivider()
+        }
+        
+        
+        Button("Plotly"){
+          print("Plotly")
+          let plotly = JSObject.global.Plotly.object!
+          let _ = plotly.react!("66154CE9-D203-4126-89F4-837930B5EF87", JSObject.global.JSON.object!.parse!(
+            PlotlySupport.plotlyConfig))
+          
+          let x = [1.0, 2.0, 3.0, 4.0]
+          let y = [10.0, 15.0, 13.0, 17.0]
+          let data: [Trace] = [
+              Scatter(name: "Scatter", x: x, y: y),
+              Bar(name: "Bar", x: x, y: y)
+          ]
+          let figure = Figure(data: data)
+          try! figure.show()
+          
+        }
         StatusView()
+        PlotlyView()
+        
     }.environmentObject(environment)
       .padding(10)
       .background(.gray)
