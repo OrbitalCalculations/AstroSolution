@@ -2,7 +2,7 @@
 //  AstroSolutionView.swift
 //  
 //
-//  Created by wiggles on 02/12/2021.
+//  Created by Heiko Pälike on 02/12/2021.
 //
 
 import TokamakShim

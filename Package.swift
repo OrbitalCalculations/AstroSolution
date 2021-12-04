@@ -19,10 +19,6 @@ let package = Package(
     .package(name: "Tokamak",
              url: "https://github.com/TokamakUI/Tokamak",
              from: "0.9.0"),
-    //.package(name: "Plotly",
-    //         url: "https://github.com/vojtamolda/Plotly.swift.git",
-    //         .exact("0.5.0"))
-      .package(name: "Plotly", path: "../Plotly.swift")
   ],
   targets: [
     .executableTarget(
@@ -32,7 +28,6 @@ let package = Package(
             "JavaScriptKit",
             .product(name: "JavaScriptEventLoop", package: "JavaScriptKit"),
             .product(name: "LNTBinaryCoding", package: "CommonCoding"),
-            "Plotly"
         ],
         resources: [
           .copy("Resources/precomputedList.json"),
