@@ -60,7 +60,7 @@ extension PlotlySupport {
             ],
             "ticks": "outside",
             "title": {
-                "text": "$\\text{years}$"
+                "text": "years"
             },
             "showgrid": true,
             "showline": true,
@@ -94,7 +94,7 @@ extension PlotlySupport {
             "tick0": 0,
             "ticks": "outside",
             "title": {
-                "text": "$p_A \\text{ (''/yr)}$"
+                "text": "p_A (''/yr)"
             },
             "tickmode": "linear",
             "autorange": true,
@@ -102,10 +102,10 @@ extension PlotlySupport {
             "gridwidth": 0.5,
             "tickformat": "04.1f"
         },
-        "height": 250,
+        "height": 240,
         "margin": {
-            "b": 50,
-            "l": 60,
+            "b": 35,
+            "l": 65,
             "r": 0,
             "t": 0,
             "pad": 0

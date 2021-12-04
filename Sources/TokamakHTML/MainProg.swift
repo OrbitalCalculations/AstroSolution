@@ -32,10 +32,10 @@ struct AstroSolutionApp: App {
   func setupPlotly() {
     #if os(WASI)
     let document = JSObject.global.document
-    let script = document.createElement("script")
-    let _ = script.setAttribute("src",
-                                 "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js")
-    let _ = document.head.appendChild(script)
+    //let script = document.createElement("script")
+    //let _ = script.setAttribute("src",
+    //                             "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js")
+    //let _ = document.head.appendChild(script)
 
     let script2 = document.createElement("script")
     let _ = script2.setAttribute("src", "https://cdn.plot.ly/plotly-latest.min.js")
