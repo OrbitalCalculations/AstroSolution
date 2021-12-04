@@ -27,7 +27,7 @@ let package = Package(
             .product(name: "TokamakShim", package: "Tokamak"),
             "JavaScriptKit",
             .product(name: "JavaScriptEventLoop", package: "JavaScriptKit"),
-            .product(name: "LNTBinaryCoding", package: "CommonCoding")
+            .product(name: "LNTBinaryCoding", package: "CommonCoding"),
         ],
         resources: [
           .copy("Resources/precomputedList.json"),
