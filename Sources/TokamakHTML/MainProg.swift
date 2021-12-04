@@ -25,7 +25,26 @@ import WASILibc
 let IPRT = 0
 
 struct AstroSolutionApp: App {
-    var body: some Scene {
+  init(){
+    let _ = setupPlotly()
+  }
+  
+  func setupPlotly() {
+    #if os(WASI)
+    let document = JSObject.global.document
+    //let script = document.createElement("script")
+    //let _ = script.setAttribute("src",
+    //                             "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js")
+    //let _ = document.head.appendChild(script)
+
+    let script2 = document.createElement("script")
+    let _ = script2.setAttribute("src", "https://cdn.plot.ly/plotly-latest.min.js")
+    let _ = document.head.appendChild(script2)
+
+    #endif
+  }
+
+  var body: some TokamakShim.Scene {
       WindowGroup("AstroSolution WebApp") {
           ContentView()
       }
@@ -47,8 +66,8 @@ struct ContentView: View {
 
   @StateObject var environment = AppEnvironment()
 
-  
   var body: some View {
+    
       let solutionProxy = Binding(
           get: { solutionSelection },
           set: { newValue in
@@ -64,21 +83,39 @@ struct ContentView: View {
         Text("Computation Tool for Astronomical Solutions")
           .bold()
           .font(.headline)
-
         
-        HStack {
-          AstroSolutionView(selection: solutionProxy)
-          //TooltipView("Different astronomical solutions can be selected here. Please note that some are not (yet) available (La2004/La2011), as their orbital elements have not been published yet, and are therefore irreproducible.")
-        }
+        Group {
+        AstroSolutionView(selection: solutionProxy)
         CustomDivider()
-        startMyrSelectionView()
+        
+        StartMyrSelectionView()
         CustomDivider()
+        
         FgamCmarSelectionView()
         CustomDivider()
+        
         ComputationButton(solutionSelection: solutionProxy)
           .buttonStyle(BorderedProminentButtonStyle())
+        
+        }
         CustomDivider()
         StatusView()
+        CustomDivider()
+
+        Button("Preview general precession in longitude plot"){
+          print("Plotly")
+          let plotly = JSObject.global.Plotly.object!
+          let (x,y) = pAModelling.pAPrediction(fgam: environment.fgam, cmar: environment.cmar)
+          
+          let _ = plotly.react!(
+            "66154CE9-D203-4126-89F4-837930B5EF87",
+            JSObject.global.JSON.object!.parse!(
+              PlotlySupport.chartStudioTemplate(x: x, y: y))
+          )
+          
+        }
+        PlotlyView()
+        
     }.environmentObject(environment)
       .padding(10)
       .background(.gray)
