@@ -1,0 +1,20 @@
+[
+  {
+    "name": "La1993", "versions": []
+  },
+  {
+    "name": "La2004", "versions": []
+  },
+  {
+    "name": "La2010",  "versions": ["a", "b", "c", "d"]
+  },
+  {
+    "name": "La2011", "versions": []
+  },
+  {
+    "name": "ZB2017", "versions": ["e"]
+  },
+  {
+    "name": "ZB2018", "versions": ["a"],
+  }
+]

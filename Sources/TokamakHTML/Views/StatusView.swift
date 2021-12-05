@@ -25,13 +25,13 @@ public struct StatusView: View {
         .background(.white)
     }
     .opacity(environment.shouldShowSolutionName ? 1 : 0)
-    HStack {
+    /*HStack {
       ProgressView("Loading")
       .opacity(environment.isDownloading ? 1 : 0)
     ProgressView("Computing")
       .opacity(environment.isComputing ? 1 : 0)
     ProgressView("Processing")
       .opacity(environment.isProcessing ? 1 : 0)
-    }
+    }*/
   }
 }

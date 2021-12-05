@@ -20,8 +20,8 @@ struct PlotlyView: View {
     #if os(WASI)
 
     HTML("div", ["id":"66154CE9-D203-4126-89F4-837930B5EF87",
-           "style":"width:600px;height:250px;",
-           "min-height":"200px"])
+           "style":"width:100%;height:100%;",
+           "min-height":"150"])
     #endif
   }
 }

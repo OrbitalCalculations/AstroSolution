@@ -34,7 +34,7 @@ struct FgamCmarSelectionView: View {
         let _ = plotly?.react?(
           "66154CE9-D203-4126-89F4-837930B5EF87",
           JSObject.global.JSON.object!.parse!(
-            PlotlySupport.chartStudioTemplate(x: x, y: y))
+            PlotlySupport.chartStudioTemplate(x: x, y: y, height: 240, width: 400))
         )
       }
     )
@@ -48,7 +48,7 @@ struct FgamCmarSelectionView: View {
         let _ = plotly?.react?(
           "66154CE9-D203-4126-89F4-837930B5EF87",
           JSObject.global.JSON.object!.parse!(
-            PlotlySupport.chartStudioTemplate(x: x, y: y))
+            PlotlySupport.chartStudioTemplate(x: x, y: y, height: 240, width: 400))
         )
       }
     )

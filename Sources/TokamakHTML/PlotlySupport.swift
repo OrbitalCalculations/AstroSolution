@@ -12,7 +12,7 @@ struct PlotlySupport {}
 
 extension PlotlySupport {
 
-  static func chartStudioTemplate(x: [Double], y: [Double]) -> String {
+  static func chartStudioTemplate(x: [Double], y: [Double], height: Int, width: Int) -> String {
      return """
 { "data": [
         {
@@ -102,13 +102,14 @@ extension PlotlySupport {
             "gridwidth": 0.5,
             "tickformat": "04.1f"
         },
-        "height": 240,
+        "width": \(width),
+        "height": \(height),
         "margin": {
             "b": 35,
-            "l": 65,
-            "r": 0,
+            "l": 55,
+            "r": 30,
             "t": 0,
-            "pad": 0
+            "pad": 5
         },
         "autosize": true,
         "clickmode": "none",
