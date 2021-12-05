@@ -46,7 +46,10 @@ struct AstroSolutionApp: App {
 
   var body: some TokamakShim.Scene {
       WindowGroup("AstroSolution WebApp") {
+        ScrollView(.vertical, showsIndicators: true) {
           ContentView()
+        }
+        .frame(height: 580)
       }
     }
 }
@@ -67,7 +70,6 @@ struct ContentView: View {
   @StateObject var environment = AppEnvironment()
 
   var body: some View {
-    
       let solutionProxy = Binding(
           get: { solutionSelection },
           set: { newValue in
@@ -78,9 +80,9 @@ struct ContentView: View {
             environment.shouldShowSolutionName = true
           }
       )
-   
+    
       VStack(alignment: .leading) {
-        Text("Computation Tool for Astronomical Solutions")
+        Text("Astronomical Solutions Tool")
           .bold()
           .font(.headline)
         
@@ -96,37 +98,34 @@ struct ContentView: View {
         
         ComputationButton(solutionSelection: solutionProxy)
           .buttonStyle(BorderedProminentButtonStyle())
-        
         }
-        CustomDivider()
         StatusView()
-        CustomDivider()
 
         Button("Preview general precession in longitude plot"){
-          
-          print("Plotly")
           let plotly = JSObject.global.Plotly.object!
           let (x,y) = pAModelling.pAPrediction(fgam: environment.fgam, cmar: environment.cmar)
-          
           let _ = plotly.react!(
             "66154CE9-D203-4126-89F4-837930B5EF87",
             JSObject.global.JSON.object!.parse!(
-              PlotlySupport.chartStudioTemplate(x: x, y: y, height: 240, width: 400))
+              PlotlySupport.chartStudioTemplate(x: x, y: y, height: 210, width: 400))
           )
           
         }
         
         PlotlyView()
-        Text("Heiko Pälike. (2021). AstroSolution: Zenodo Release v0.0.5.")
+        Text("H. Pälike, 2021. AstroSolution: Zenodo v0.0.5.")
         Link("https://doi.org/10.5281/zenodo.5736415", destination: URL(string: "https://doi.org/10.5281/zenodo.5736415")!)
           .foregroundColor(.white)
           .background(.blue)
-    }.environmentObject(environment)
-      .padding(10)
+        Spacer()
+      }.padding(10)
+        
       .background(.gray)
       .onAppear {
-        environment.solutionName = environment.fileName()
+          environment.solutionName = environment.fileName()
       }
+      .environmentObject(environment)
+      
   }
 }
 

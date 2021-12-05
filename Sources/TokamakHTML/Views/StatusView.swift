@@ -18,7 +18,6 @@ public struct StatusView: View {
   public var body: some View {
     VStack {
       Text("File to generate and download:")
-      Text("(~2500 kyr/sec)")
       Text("\(environment.solutionName)")
         .italic()
         .foregroundColor(.blue)
