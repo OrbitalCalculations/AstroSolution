@@ -49,7 +49,7 @@ struct AstroSolutionApp: App {
         ScrollView(.vertical, showsIndicators: true) {
           ContentView()
         }
-        .frame(height: 580)
+        .frame(height: 600, alignment: Alignment.top)
       }
     }
 }
@@ -80,8 +80,8 @@ struct ContentView: View {
             environment.shouldShowSolutionName = true
           }
       )
-    
-      VStack(alignment: .leading) {
+    HStack(alignment: VerticalAlignment.top) {
+      VStack(alignment: HorizontalAlignment.leading) {
         Text("Astronomical Solutions Tool")
           .bold()
           .font(.headline)
@@ -117,15 +117,16 @@ struct ContentView: View {
         Link("https://doi.org/10.5281/zenodo.5736415", destination: URL(string: "https://doi.org/10.5281/zenodo.5736415")!)
           .foregroundColor(.white)
           .background(.blue)
-        Spacer()
       }.padding(10)
         
       .background(.gray)
       .onAppear {
           environment.solutionName = environment.fileName()
       }
-      .environmentObject(environment)
       
+      Spacer()
+    }
+    .environmentObject(environment)
   }
 }
 

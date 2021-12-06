@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Plotly
+//import Plotly
 
 struct PlotlySupport {}
 
@@ -119,7 +119,8 @@ extension PlotlySupport {
                 "family": "Arial"
             }
         },
-        "plot_bgcolor": "rgb(250, 246, 235)"
+        "plot_bgcolor": "rgb(250, 246, 235)",
+        "hovermode": "closest"
     },
     "config":{"responsive":true,"staticPlot":true,"displayModeBar": false, "displayLogo": false},
     "frames": []
